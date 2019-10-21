@@ -1,5 +1,6 @@
-require 'ocfl_tools'
+require 'ocfl_stanford'
 require 'moab'
 require 'moab/stanford'
 require 'nokogiri'
 require 'druid-tools'
+require 'ocfl_tools'
