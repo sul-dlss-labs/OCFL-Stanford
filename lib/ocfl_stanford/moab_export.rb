@@ -1,6 +1,6 @@
 module OcflStanford
   class MoabExport
-
+    # Manipulates Moab objects to make OCFL-friendly inputs.
     # @return [Array] A series of [Integer] representing all versions of the Moab object.
     attr_reader :versions
 
@@ -27,21 +27,21 @@ module OcflStanford
 
     # used by get_deltas
     def version_inventory(version)
-      # @param [Integer] version of object to generate inventory for.
+      # @param version [Integer] version of object to generate inventory for.
       # @return [Hash] of all files and checksums that represent the object at given version.
       self.get_inventory('version', version)
     end
 
     # used by generate_ocfl_manifest_until_version
     def version_additions(version)
-      # @param [Integer] version of object to generate inventory for.
+      # @param version [Integer] version of object to generate inventory for.
       # @return [Hash] of all files and checksums that were added or modified at this version.
       self.get_inventory('additions', version)
     end
 
     # used by get_prior_delta
     def get_FileInventory(version)
-      # @param [Integer] version of object to generate inventory file for.
+      # @param version [Integer] version of object to generate inventory file for.
       # @return [Moab::FileInventory] for given version.
       moab_version = @moab.find_object_version(version)
       moab_version.file_inventory( 'version' )
@@ -108,7 +108,7 @@ module OcflStanford
     end
 
     def generate_ocfl_fixity_until_version(version)
-      # @param [Integer] version number to generate manifest for. Manifest will include all prior versions.
+      # @param version [Integer] version number to generate manifest for. Manifest will include all prior versions.
       # Fixity is basically a Manifest block inside a wrapping hash.
       my_fixity = Hash.new
       my_fixity["#{@digest}"] = generate_ocfl_manifest_until_version(version)
@@ -121,7 +121,7 @@ module OcflStanford
     end
 
     def generate_ocfl_manifest_until_version(version)
-      # @param [Integer] version number to generate manifest for. Manifest will include all prior versions.
+      # @param version [Integer] version number to generate manifest for. Manifest will include all prior versions.
       # @return [Hash] OCFL-compliant Manifest block; keys are digests, values are [Array] of files.
       # Produces a partial manifest; i.e. if the Moab has a current version of 9,
       # this method can produce a manifest up to version 7. Used for back-filling Moab version directories
@@ -157,7 +157,7 @@ module OcflStanford
     end
 
     def generate_ocfl_state(version)
-      # @param [Integer] version to create state block for.
+      # @param version [Integer] version to create state block for.
       # @return [Hash] OCFL-compliant state block, used in OCFL Versions block.
       input = self.version_inventory(version)
       # input is a [Hash] with files as key, digests as checksum.
@@ -262,7 +262,7 @@ module OcflStanford
     end
 
     def get_prior_delta(version)
-      # @param [Integer] version of object to generate delta for.
+      # @param version [Integer] version of object to generate delta for.
       # @return [Hash] of actions that have been performed on this Moab since the prior version.
 
       raise "Provided version must be greater than 1!" unless version > 1
@@ -331,8 +331,8 @@ module OcflStanford
     end
 
     def get_inventory(inventory, version)
-      # @param [String] one of 'additions', 'manifests', 'version'.
-      # @param [Integer] version of Moab to get inventory for.
+      # @param one of 'additions', 'manifests', 'version' [String].
+      # @param version [Integer] version of Moab to get inventory for.
       # @return [Hash] of files and checksums for given inventory type and version.
 
       moab_version = @moab.find_object_version( version )
