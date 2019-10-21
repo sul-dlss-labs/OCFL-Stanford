@@ -7,6 +7,7 @@ Install the gem. That should also install the pre-req gems.
 ## Basic Usage
 Configure your storage services as with Moab. To create an OCFL inventory
 and sidecar digest file in the Druid's existing object directory, do:
+
 ```
 require 'ocfl-stanford'
 
@@ -19,7 +20,6 @@ end
 
 druid='bj102hs9687'
 
-# Given a [String] druid, make an OCFL inventory file in the object root.
 OcflStanford::DruidExport.new(druid).make_inventory
 ```
 
@@ -27,12 +27,15 @@ OcflStanford::DruidExport.new(druid).make_inventory
 ( Not really, it's not that complicated.)
 
 To control where the inventory and digest files are created, do:
+
 ```
 ocfl = OcflStanford::DruidExport.new(druid)
 ocfl.export_directory = '/some/path/for/inventory'
 ocfl.make_inventory
 ```
+
 More fine-grained control can be had via `OcflStanford::MoabExport` and OcflTools:
+
 ```
 export = StanfordTools::MoabExport.new(moab)
 
