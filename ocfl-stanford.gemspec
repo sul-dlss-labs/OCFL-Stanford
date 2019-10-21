@@ -18,4 +18,5 @@ Gem::Specification.new do |gem|
   gem.name          = 'ocfl-stanford'
   gem.require_paths = ['lib']
   gem.version       = File.read('VERSION').strip
+  #gem.metadata["yard.run"] = "yri" # use "yard" to build full HTML docs.
 end
